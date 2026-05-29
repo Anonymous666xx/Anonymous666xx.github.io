@@ -4,56 +4,78 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>World Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
   <h1>World Dashboard</h1>
+  <p class="subtitle">Live data from around the globe</p>
 </header>
 
 <div class="tabs" id="tabBar">
-  <button class="tab-btn active" data-tab="clock">Clock</button>
-  <button class="tab-btn" data-tab="weather">Weather</button>
-  <button class="tab-btn" data-tab="currency">Currency</button>
-  <button class="tab-btn" data-tab="markets">Markets</button>
+  <button class="tab-btn active" data-tab="clock">🕐 Clock</button>
+  <button class="tab-btn" data-tab="weather">🌤 Weather</button>
+  <button class="tab-btn" data-tab="currency">💱 Currency</button>
+  <button class="tab-btn" data-tab="markets">📈 Markets</button>
+  <button class="tab-btn" data-tab="crypto">₿ Crypto</button>
 </div>
 
 <div class="tab-content active" id="tab-clock">
-  <div class="grid" id="clockGrid"><div class="loading">Loading world clocks...</div></div>
+  <div class="section-header">
+    <h2>World Clocks</h2>
+    <span class="badge" id="clockCount">—</span>
+  </div>
+  <div class="grid" id="clockGrid"><div class="loading">Loading clocks...</div></div>
 </div>
 
 <div class="tab-content" id="tab-weather">
-  <div class="grid" id="weatherGrid"><div class="loading">Loading weather data...</div></div>
+  <div class="section-header">
+    <h2>Weather</h2>
+    <span class="badge" id="weatherCount">—</span>
+  </div>
+  <div class="grid" id="weatherGrid"><div class="loading">Loading weather...</div></div>
 </div>
 
 <div class="tab-content" id="tab-currency">
-  <div class="currency-header">
+  <div class="section-header">
     <h2>Exchange Rates</h2>
-    <div class="base-currency">Base: USD</div>
+    <span class="badge">Base: USD</span>
   </div>
-  <div class="currency-grid" id="currencyGrid"><div class="loading">Loading exchange rates...</div></div>
+  <input type="text" class="search-box" id="currencySearch" placeholder="Search currencies...">
+  <div class="currency-grid" id="currencyGrid"><div class="loading">Loading rates...</div></div>
   <div class="converter-box">
     <h3>Currency Converter</h3>
     <div class="converter-row">
       <input type="number" id="convAmount" value="1" min="0" step="0.01">
       <select id="convFrom"></select>
-      <span class="eq">=</span>
-      <span class="result" id="convResult">—</span>
+      <span class="eq">→</span>
       <select id="convTo"></select>
+      <span class="result" id="convResult">—</span>
     </div>
   </div>
 </div>
 
 <div class="tab-content" id="tab-markets">
-  <div class="markets-grid" id="marketsGrid"><div class="loading">Loading market data...</div></div>
+  <div class="section-header">
+    <h2>Commodities</h2>
+  </div>
+  <div class="markets-grid" id="marketsGrid"><div class="loading">Loading markets...</div></div>
 </div>
 
-<div class="refresh-bar">
+<div class="tab-content" id="tab-crypto">
+  <div class="section-header">
+    <h2>Cryptocurrency</h2>
+  </div>
+  <div class="markets-grid" id="cryptoGrid"><div class="loading">Loading crypto...</div></div>
+</div>
+
+<div class="status-bar">
   <span class="live-dot"></span>
-  <span>Live</span>
-  <span id="lastUpdated"></span>
+  <span>All data live</span>
+  <span class="sep">·</span>
+  <span id="lastUpdated">—</span>
 </div>
 
 <script src="script.js"></script>
