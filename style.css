@@ -580,181 +580,95 @@ header h1::after {
   font-family: 'JetBrains Mono', monospace;
 }
 
-.games-layout {
+.game-select-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.9rem;
 }
 
-.game-card {
+.game-select-card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
   text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.game-title {
-  font-size: 1rem;
+.game-select-card:hover {
+  border-color: rgba(120, 80, 240, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(120, 80, 240, 0.06);
+}
+
+.game-select-icon {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.game-select-name {
+  font-size: 0.95rem;
   font-weight: 700;
   color: #e0e0f0;
+  margin-bottom: 0.3rem;
+}
+
+.game-select-desc {
+  font-size: 0.7rem;
+  color: #686888;
+}
+
+.game-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 1rem;
 }
 
-.ttt-board {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  max-width: 220px;
-  margin: 0 auto 1rem;
-}
-
-.ttt-cell {
-  aspect-ratio: 1;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.game-back-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.ttt-cell:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-.ttt-cell.x { color: #70a8f0; }
-.ttt-cell.o { color: #f0b850; }
-.ttt-cell.win { background: rgba(74, 200, 100, 0.15); border-color: rgba(74, 200, 100, 0.3); }
-
-.ttt-status {
-  font-size: 0.8rem;
-  color: #8888a8;
-  margin-bottom: 0.75rem;
-  font-weight: 500;
-}
-
-.game-btn {
-  background: rgba(120, 80, 240, 0.15);
-  border: 1px solid rgba(120, 80, 240, 0.25);
-  border-radius: 8px;
-  padding: 0.45rem 1.2rem;
-  color: #b8a8f0;
+  padding: 0.45rem 1rem;
+  color: #b0b0d0;
   font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
 }
 
-.game-btn:hover {
-  background: rgba(120, 80, 240, 0.25);
-  border-color: rgba(120, 80, 240, 0.4);
-  box-shadow: 0 0 20px rgba(120, 80, 240, 0.1);
-}
-
-.rps-icons {
-  display: flex;
-  gap: 0.6rem;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.rps-btn {
-  width: 60px;
-  height: 60px;
-  font-size: 1.6rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-
-.rps-btn:hover {
+.game-back-btn:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.15);
-  transform: scale(1.1);
 }
 
-.rps-result {
-  font-size: 0.85rem;
-  color: #b0b0d0;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-  min-height: 1.5rem;
-}
-
-.rps-score {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  font-size: 0.75rem;
-  color: #686888;
-  margin-bottom: 0.75rem;
-}
-
-.rps-score strong {
-  color: #c0c0e0;
-  font-size: 1rem;
-}
-
-.click-area {
-  width: 180px;
-  height: 140px;
-  margin: 0 auto 0.75rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.15s;
-  user-select: none;
-}
-
-.click-area:hover {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.click-area:active {
-  transform: scale(0.97);
-}
-
-.click-area.running {
-  background: rgba(74, 200, 100, 0.06);
-  border-color: rgba(74, 200, 100, 0.2);
-}
-
-.click-count {
+.game-score-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 3rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: #fff;
-  line-height: 1;
+  color: #6ae88a;
 }
 
-.click-label {
-  font-size: 0.65rem;
-  color: #686888;
-  margin-top: 0.2rem;
+#gameCanvas {
+  width: 100%;
+  max-width: 500px;
+  height: 500px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  background: #0a0a15;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.click-status {
+.game-controls-hint {
+  text-align: center;
   font-size: 0.75rem;
-  color: #8888a8;
-  margin-bottom: 0.75rem;
+  color: #585878;
+  margin-top: 0.75rem;
   font-weight: 500;
 }
 

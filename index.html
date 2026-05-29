@@ -73,40 +73,51 @@
 </div>
 
 <div class="tab-content" id="tab-games">
-  <div class="section-header">
-    <h2>Mini Games</h2>
+  <div id="gameMenu">
+    <div class="section-header">
+      <h2>Arcade</h2>
+      <span class="badge">Click to play</span>
+    </div>
+    <div class="game-select-grid">
+      <div class="game-select-card" data-game="bird">
+        <div class="game-select-icon">🐦</div>
+        <div class="game-select-name">Flappy Bird</div>
+        <div class="game-select-desc">Tap to fly through pipes</div>
+      </div>
+      <div class="game-select-card" data-game="car">
+        <div class="game-select-icon">🏎️</div>
+        <div class="game-select-name">Car Dodge</div>
+        <div class="game-select-desc">Dodge traffic on the highway</div>
+      </div>
+      <div class="game-select-card" data-game="snake">
+        <div class="game-select-icon">🐍</div>
+        <div class="game-select-name">Snake</div>
+        <div class="game-select-desc">Classic snake game</div>
+      </div>
+      <div class="game-select-card" data-game="tetris">
+        <div class="game-select-icon">🧱</div>
+        <div class="game-select-name">Tetris</div>
+        <div class="game-select-desc">Stack the blocks</div>
+      </div>
+      <div class="game-select-card" data-game="pong">
+        <div class="game-select-icon">🏓</div>
+        <div class="game-select-name">Pong</div>
+        <div class="game-select-desc">Classic paddle battle</div>
+      </div>
+      <div class="game-select-card" data-game="click">
+        <div class="game-select-icon">🖱️</div>
+        <div class="game-select-name">Click Speed</div>
+        <div class="game-select-desc">How fast can you click?</div>
+      </div>
+    </div>
   </div>
-  <div class="games-layout">
-    <div class="game-card">
-      <h3 class="game-title">Tic Tac Toe</h3>
-      <div class="ttt-board" id="tttBoard"></div>
-      <div class="ttt-status" id="tttStatus">Your turn (X)</div>
-      <button class="game-btn" id="tttReset">New Game</button>
+  <div id="gamePlay" style="display:none;">
+    <div class="game-top-bar">
+      <button class="game-back-btn" id="gameBackBtn">← Back</button>
+      <span class="game-score-label" id="gameScoreLabel">Score: 0</span>
     </div>
-    <div class="game-card">
-      <h3 class="game-title">Rock Paper Scissors</h3>
-      <div class="rps-icons">
-        <button class="rps-btn" data-move="rock">🪨</button>
-        <button class="rps-btn" data-move="paper">📄</button>
-        <button class="rps-btn" data-move="scissors">✂️</button>
-      </div>
-      <div class="rps-result" id="rpsResult">Choose your move!</div>
-      <div class="rps-score">
-        <span>You: <strong id="rpsPlayer">0</strong></span>
-        <span>Bot: <strong id="rpsBot">0</strong></span>
-        <span>Draw: <strong id="rpsDraw">0</strong></span>
-      </div>
-      <button class="game-btn" id="rpsReset">Reset Score</button>
-    </div>
-    <div class="game-card">
-      <h3 class="game-title">Click Speed</h3>
-      <div class="click-area" id="clickArea">
-        <div class="click-count" id="clickCount">0</div>
-        <div class="click-label">clicks</div>
-      </div>
-      <div class="click-status" id="clickStatus">Click the box! 10 seconds</div>
-      <button class="game-btn" id="clickReset">Start Over</button>
-    </div>
+    <canvas id="gameCanvas"></canvas>
+    <div class="game-controls-hint" id="gameHint">Press SPACE or click to jump</div>
   </div>
 </div>
 
