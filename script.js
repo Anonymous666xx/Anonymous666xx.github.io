@@ -165,15 +165,29 @@ function upd() {
   if (el) el.textContent = new Date().toLocaleTimeString();
 }
 
+var activeTab = 'clock';
+
 document.getElementById('tabBar').addEventListener('click', function(e) {
   var btn = e.target.closest('.tab-btn');
-  if (!btn) return;
+  if (!btn || btn.dataset.tab === activeTab) return;
   document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
   btn.classList.add('active');
   document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
   var tab = document.getElementById('tab-'+btn.dataset.tab);
   if (tab) tab.classList.add('active');
+  activeTab = btn.dataset.tab;
+  // Refresh data on tab switch
+  if (activeTab === 'weather') initWeather();
+  if (activeTab === 'currency') initCurrency();
+  if (activeTab === 'markets') initMarkets();
+  if (activeTab === 'crypto') initCrypto();
 });
+
+// Auto-refresh intervals (only fire when tab is active)
+setInterval(function() { if (activeTab === 'crypto') initCrypto(); }, 30000);
+setInterval(function() { if (activeTab === 'markets') initMarkets(); }, 60000);
+setInterval(function() { if (activeTab === 'currency') initCurrency(); }, 60000);
+setInterval(function() { if (activeTab === 'weather') initWeather(); }, 300000);
 
 // ===== CLOCK =====
 async function initClock() {
