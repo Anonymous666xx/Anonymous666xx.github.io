@@ -392,50 +392,43 @@ function setupConverter() {
 async function initMarkets() {
   var grid = document.getElementById('marketsGrid');
   if (!grid) return;
+  var goldPrice = null, silverPrice = null;
   try {
-    var res = await fetch('https://api.metals.live/v1/spot/gold');
-    var goldPrice = null, silverPrice = null;
+    var res = await fetch('https://mintedmetal.com/api/prices.json');
     if (res.ok) {
-      try {
-        var g = await res.json();
-        if (Array.isArray(g)) {
-          for (var i=0; i<g.length; i++) {
-            if (g[i].metal === 'XAU') goldPrice = g[i].price;
-            if (g[i].metal === 'XAG') silverPrice = g[i].price;
-          }
-        } else {
-          goldPrice = g.spotPrice || g.price;
-        }
-      } catch(e) {}
+      var d = await res.json();
+      if (d && d.metals) {
+        if (d.metals.gold) goldPrice = d.metals.gold.price;
+        if (d.metals.silver) silverPrice = d.metals.silver.price;
+      }
     }
-    var html = '';
-    if (goldPrice) {
-      html += '<div class="market-card"><div class="market-icon">🥇</div>'
-        +'<div class="market-label">Gold</div>'
-        +'<div class="market-price gold">$'+fmt(goldPrice,0)+'</div>'
-        +'<div class="market-label" style="margin-top:0.25rem;font-size:0.6rem;">per troy oz</div></div>';
-    }
-    if (silverPrice) {
-      html += '<div class="market-card"><div class="market-icon">🥈</div>'
-        +'<div class="market-label">Silver</div>'
-        +'<div class="market-price gold">$'+fmt(silverPrice,2)+'</div>'
-        +'<div class="market-label" style="margin-top:0.25rem;font-size:0.6rem;">per troy oz</div></div>';
-    }
-    if (!goldPrice && !silverPrice) {
-      html += '<div class="market-card"><div class="market-icon">🥇</div>'
-        +'<div class="market-label">Gold</div>'
-        +'<div class="market-price gold">$2,350.00</div>'
-        +'<div class="market-label" style="margin-top:0.25rem;font-size:0.6rem;">per troy oz (ref)</div></div>'
-        +'<div class="market-card"><div class="market-icon">🥈</div>'
-        +'<div class="market-label">Silver</div>'
-        +'<div class="market-price gold">$33.42</div>'
-        +'<div class="market-label" style="margin-top:0.25rem;font-size:0.6rem;">per troy oz (ref)</div></div>';
-    }
-    grid.innerHTML = html;
-    upd();
-  } catch(e) {
-    grid.innerHTML = '<div class="error-state">Failed to load</div>';
+  } catch(e) {}
+  var html = '';
+  if (goldPrice) {
+    html += '<div class="market-card"><div class="market-icon">🥇</div>'
+      +'<div class="market-label">Gold</div>'
+      +'<div class="market-price gold">$'+fmt(goldPrice,0)+'</div>'
+      +'<div class="market-label" style="margin-top:0.25rem;font-size:0.6rem;">per troy oz</div></div>';
   }
+  if (silverPrice) {
+    html += '<div class="market-card"><div class="market-icon">🥈</div>'
+      +'<div class="market-label">Silver</div>'
+      +'<div class="market-price gold">$'+fmt(silverPrice,2)+'</div>'
+      +'<div class="market-label" style="margin-top:0.25rem;font-size:0.6rem;">per troy oz</div></div>';
+  }
+  if (!goldPrice && !silverPrice) {
+    html += '<div class="market-card"><div class="market-icon">🥇</div>'
+      +'<div class="market-label">Gold</div>'
+      +'<div class="market-price gold">$2,350.00</div>'
+      +'<div class="market-label" style="margin-top:0.25rem;font-size:0.6rem;">per troy oz (ref)</div></div>'
+      +'<div class="market-card"><div class="market-icon">🥈</div>'
+      +'<div class="market-label">Silver</div>'
+      +'<div class="market-price gold">$33.42</div>'
+      +'<div class="market-label" style="margin-top:0.25rem;font-size:0.6rem;">per troy oz (ref)</div></div>';
+  }
+  html += '<div class="market-card" style="grid-column:1/-1;font-size:0.55rem;opacity:0.5;text-align:center;padding:0.25rem;">Prices via <a href="https://mintedmetal.com" target="_blank" style="color:inherit">Minted Metal</a> (CC BY 4.0)</div>';
+  grid.innerHTML = html;
+  upd();
 }
 
 // ===== CRYPTO =====
