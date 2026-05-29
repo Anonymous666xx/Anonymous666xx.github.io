@@ -478,8 +478,184 @@ async function initCrypto() {
   }
 }
 
+// ===== GAMES =====
+function initGames() {
+  initTTT();
+  initRPS();
+  initClickSpeed();
+}
+
+function initTTT() {
+  var board = ['','','','','','','','',''];
+  var current = 'X';
+  var gameOver = false;
+  var grid = document.getElementById('tttBoard');
+  var status = document.getElementById('tttStatus');
+  if (!grid) return;
+
+  function render() {
+    grid.innerHTML = '';
+    for (var i=0; i<9; i++) {
+      var cell = document.createElement('div');
+      cell.className = 'ttt-cell' + (board[i]==='X'?' x':'') + (board[i]==='O'?' o':'');
+      cell.textContent = board[i];
+      cell.dataset.idx = i;
+      cell.addEventListener('click', handleClick);
+      grid.appendChild(cell);
+    }
+  }
+
+  function checkWin() {
+    var wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    for (var i=0; i<wins.length; i++) {
+      var a=wins[i][0], b=wins[i][1], c=wins[i][2];
+      if (board[a] && board[a]===board[b] && board[a]===board[c]) {
+        var cells = grid.querySelectorAll('.ttt-cell');
+        cells[a].classList.add('win');
+        cells[b].classList.add('win');
+        cells[c].classList.add('win');
+        return board[a];
+      }
+    }
+    if (board.indexOf('')===-1) return 'draw';
+    return null;
+  }
+
+  function aiMove() {
+    var empty = [];
+    for (var i=0; i<9; i++) { if (!board[i]) empty.push(i); }
+    return empty[Math.floor(Math.random()*empty.length)];
+  }
+
+  function handleClick(e) {
+    if (gameOver) return;
+    var idx = parseInt(e.target.dataset.idx);
+    if (board[idx]) return;
+    board[idx] = 'X';
+    render();
+    var result = checkWin();
+    if (result) {
+      gameOver = true;
+      if (result==='X') status.textContent = 'You win! 🎉';
+      else if (result==='O') status.textContent = 'AI wins! 🤖';
+      else status.textContent = 'Draw! 🤝';
+      return;
+    }
+    status.textContent = 'AI thinking...';
+    setTimeout(function() {
+      var ai = aiMove();
+      if (ai===undefined) { gameOver=true; status.textContent='Draw! 🤝'; return; }
+      board[ai] = 'O';
+      render();
+      var r2 = checkWin();
+      if (r2) {
+        gameOver = true;
+        if (r2==='X') status.textContent = 'You win! 🎉';
+        else if (r2==='O') status.textContent = 'AI wins! 🤖';
+        else status.textContent = 'Draw! 🤝';
+      } else {
+        status.textContent = 'Your turn (X)';
+      }
+    }, 400);
+  }
+
+  render();
+  status.textContent = 'Your turn (X)';
+
+  document.getElementById('tttReset').addEventListener('click', function() {
+    board = ['','','','','','','','',''];
+    current = 'X';
+    gameOver = false;
+    render();
+    status.textContent = 'Your turn (X)';
+  });
+}
+
+function initRPS() {
+  var player = 0, bot = 0, draw = 0;
+  var resultEl = document.getElementById('rpsResult');
+  var pEl = document.getElementById('rpsPlayer');
+  var bEl = document.getElementById('rpsBot');
+  var dEl = document.getElementById('rpsDraw');
+  if (!resultEl) return;
+
+  var moves = { rock: '🪨', paper: '📄', scissors: '✂️' };
+
+  document.querySelectorAll('.rps-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var pMove = this.dataset.move;
+      var choices = ['rock','paper','scissors'];
+      var bMove = choices[Math.floor(Math.random()*3)];
+
+      var result;
+      if (pMove === bMove) { result = 'draw'; draw++; }
+      else if (
+        (pMove==='rock' && bMove==='scissors') ||
+        (pMove==='paper' && bMove==='rock') ||
+        (pMove==='scissors' && bMove==='paper')
+      ) { result = 'win'; player++; }
+      else { result = 'lose'; bot++; }
+
+      resultEl.innerHTML = 'You: '+moves[pMove]+' vs Bot: '+moves[bMove]+'<br>'
+        + (result==='win'?'<span style="color:#6ae88a">You Win!</span>'
+        : result==='lose'?'<span style="color:#f06060">You Lose!</span>'
+        : '<span style="color:#f0b850">Draw!</span>');
+      pEl.textContent = player;
+      bEl.textContent = bot;
+      dEl.textContent = draw;
+    });
+  });
+
+  document.getElementById('rpsReset').addEventListener('click', function() {
+    player=0; bot=0; draw=0;
+    pEl.textContent='0'; bEl.textContent='0'; dEl.textContent='0';
+    resultEl.textContent = 'Choose your move!';
+  });
+}
+
+function initClickSpeed() {
+  var area = document.getElementById('clickArea');
+  var countEl = document.getElementById('clickCount');
+  var statusEl = document.getElementById('clickStatus');
+  var resetBtn = document.getElementById('clickReset');
+  if (!area) return;
+
+  var count = 0;
+  var running = false;
+  var timer = null;
+
+  function start() {
+    count = 0;
+    running = true;
+    countEl.textContent = '0';
+    area.classList.add('running');
+    statusEl.textContent = 'Click fast! ⏱';
+    timer = setTimeout(function() {
+      running = false;
+      area.classList.remove('running');
+      statusEl.textContent = 'Time! You got '+count+' clicks! '+(count>15?'🔥 ':'')+(count>25?'🔥🔥 ':'')+(count>35?'🔥🔥🔥 ':'');
+    }, 10000);
+  }
+
+  area.addEventListener('click', function() {
+    if (!running) { start(); return; }
+    count++;
+    countEl.textContent = count;
+  });
+
+  resetBtn.addEventListener('click', function() {
+    if (timer) clearTimeout(timer);
+    running = false;
+    count = 0;
+    countEl.textContent = '0';
+    area.classList.remove('running');
+    statusEl.textContent = 'Click the box! 10 seconds';
+  });
+}
+
 initClock();
 initWeather();
 initCurrency();
 initMarkets();
 initCrypto();
+initGames();

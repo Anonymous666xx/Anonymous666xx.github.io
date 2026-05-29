@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>World Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,6 +20,7 @@
   <button class="tab-btn" data-tab="currency">💱 Currency</button>
   <button class="tab-btn" data-tab="markets">📈 Markets</button>
   <button class="tab-btn" data-tab="crypto">₿ Crypto</button>
+  <button class="tab-btn" data-tab="games">🎮 Games</button>
 </div>
 
 <div class="tab-content active" id="tab-clock">
@@ -69,6 +70,44 @@
     <h2>Cryptocurrency</h2>
   </div>
   <div class="markets-grid" id="cryptoGrid"><div class="loading">Loading crypto...</div></div>
+</div>
+
+<div class="tab-content" id="tab-games">
+  <div class="section-header">
+    <h2>Mini Games</h2>
+  </div>
+  <div class="games-layout">
+    <div class="game-card">
+      <h3 class="game-title">Tic Tac Toe</h3>
+      <div class="ttt-board" id="tttBoard"></div>
+      <div class="ttt-status" id="tttStatus">Your turn (X)</div>
+      <button class="game-btn" id="tttReset">New Game</button>
+    </div>
+    <div class="game-card">
+      <h3 class="game-title">Rock Paper Scissors</h3>
+      <div class="rps-icons">
+        <button class="rps-btn" data-move="rock">🪨</button>
+        <button class="rps-btn" data-move="paper">📄</button>
+        <button class="rps-btn" data-move="scissors">✂️</button>
+      </div>
+      <div class="rps-result" id="rpsResult">Choose your move!</div>
+      <div class="rps-score">
+        <span>You: <strong id="rpsPlayer">0</strong></span>
+        <span>Bot: <strong id="rpsBot">0</strong></span>
+        <span>Draw: <strong id="rpsDraw">0</strong></span>
+      </div>
+      <button class="game-btn" id="rpsReset">Reset Score</button>
+    </div>
+    <div class="game-card">
+      <h3 class="game-title">Click Speed</h3>
+      <div class="click-area" id="clickArea">
+        <div class="click-count" id="clickCount">0</div>
+        <div class="click-label">clicks</div>
+      </div>
+      <div class="click-status" id="clickStatus">Click the box! 10 seconds</div>
+      <button class="game-btn" id="clickReset">Start Over</button>
+    </div>
+  </div>
 </div>
 
 <div class="status-bar">
