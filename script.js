@@ -513,6 +513,10 @@ function launchGame(game) {
 
 function exitGame() {
   if (gameAnimId) { cancelAnimationFrame(gameAnimId); gameAnimId = null; }
+  document.onkeydown = null;
+  document.onkeyup = null;
+  canvas.onclick = null;
+  canvas.onmousemove = null;
   currentGame = null;
   document.getElementById('gameMenu').style.display = 'block';
   document.getElementById('gamePlay').style.display = 'none';
@@ -637,10 +641,9 @@ function initFlappy() {
     bird.vy = jump;
   }
 
-  document.addEventListener('keydown', function k(e) {
-    if (currentGame !== 'bird') return;
+  document.onkeydown = function(e) {
     if (e.code === 'Space') { e.preventDefault(); onAction(); }
-  });
+  };
   canvas.onclick = onAction;
 
   scoreLabel.textContent = 'Score: 0';
@@ -746,17 +749,15 @@ function initCar() {
     gameAnimId = requestAnimationFrame(loop);
   }
 
-  document.addEventListener('keydown', function(e) {
-    if (currentGame !== 'car') return;
+  document.onkeydown = function(e) {
     if (e.key === 'ArrowLeft') keys.left = true;
     if (e.key === 'ArrowRight') keys.right = true;
     e.preventDefault();
-  });
-  document.addEventListener('keyup', function(e) {
-    if (currentGame !== 'car') return;
+  };
+  document.onkeyup = function(e) {
     if (e.key === 'ArrowLeft') keys.left = false;
     if (e.key === 'ArrowRight') keys.right = false;
-  });
+  };
   canvas.onclick = function() { if (gameOver) { reset(); scoreLabel.textContent = 'Score: 0'; } };
 
   scoreLabel.textContent = 'Score: 0';
@@ -840,15 +841,14 @@ function initSnake() {
     gameAnimId = requestAnimationFrame(loop);
   }
 
-  document.addEventListener('keydown', function(e) {
-    if (currentGame !== 'snake') return;
+  document.onkeydown = function(e) {
     if (e.key === 'ArrowUp' && dir.y !== 1) nextDir = {x:0, y:-1};
     if (e.key === 'ArrowDown' && dir.y !== -1) nextDir = {x:0, y:1};
     if (e.key === 'ArrowLeft' && dir.x !== 1) nextDir = {x:-1, y:0};
     if (e.key === 'ArrowRight' && dir.x !== -1) nextDir = {x:1, y:0};
     if (e.key === ' ' && gameOver) { reset(); scoreLabel.textContent = 'Score: 0'; }
     e.preventDefault();
-  });
+  };
   canvas.onclick = function() { if (gameOver) { reset(); scoreLabel.textContent = 'Score: 0'; } };
 
   scoreLabel.textContent = 'Score: 0';
@@ -973,15 +973,15 @@ function initTetris() {
     gameAnimId = requestAnimationFrame(loop);
   }
 
-  document.addEventListener('keydown', function(e) {
-    if (currentGame !== 'tetris' || !current || gameOver) return;
+  document.onkeydown = function(e) {
+    if (!current || gameOver) return;
     if (e.key === 'ArrowLeft' && isValid(current.shape, current.x-1, current.y)) current.x--;
     if (e.key === 'ArrowRight' && isValid(current.shape, current.x+1, current.y)) current.x++;
     if (e.key === 'ArrowDown') update();
     if (e.key === 'ArrowUp') { var r = rotateShape(current.shape); if (isValid(r, current.x, current.y)) current.shape = r; }
     if (e.key === ' ') { while(isValid(current.shape, current.x, current.y+1)) current.y++; update(); }
     e.preventDefault();
-  });
+  };
   canvas.onclick = function() { if (gameOver) { board = []; for (var rr=0; rr<rows; rr++) { board[rr]=[]; for (var cc=0; cc<cols; cc++) board[rr][cc]=0; } score=0; gameOver=false; scoreLabel.textContent='Score: 0'; spawn(); } };
 
   scoreLabel.textContent = 'Score: 0';
