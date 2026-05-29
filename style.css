@@ -1,0 +1,395 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tab-btn {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #222;
+  color: #999;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  background: #2a2a2a;
+  color: #ccc;
+}
+
+.tab-btn.active {
+  background: #3a3a5c;
+  border-color: #5a5a8a;
+  color: #fff;
+}
+
+.tab-content {
+  display: none;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.card {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.city {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.city-icon {
+  font-size: 1.25rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2a2a2a;
+  border-radius: 8px;
+}
+
+.city-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.timezone-label {
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.time {
+  font-family: 'Inter', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0.5rem 0 0.25rem;
+  letter-spacing: 1px;
+}
+
+.date {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.am-pm {
+  font-size: 0.85rem;
+  color: #666;
+  margin-left: 0.25rem;
+  font-weight: 400;
+}
+
+.card-footer {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #2a2a2a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.utc-offset {
+  font-size: 0.7rem;
+  color: #555;
+  font-family: 'Inter', monospace;
+}
+
+.time-status {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  background: #2a2a2a;
+  color: #888;
+}
+
+.time-status.day { background: #2a3a1a; color: #8bc34a; }
+.time-status.night { background: #1a2a3a; color: #64b5f6; }
+.time-status.evening { background: #3a2a1a; color: #ffb74d; }
+
+.weather-temp {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0.5rem 0;
+}
+
+.weather-temp .deg {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.weather-desc {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+}
+
+.weather-icon {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.weather-detail {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.weather-detail span {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.weather-detail span strong {
+  color: #ccc;
+  font-weight: 600;
+}
+
+.currency-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.currency-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.base-currency {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.currency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.currency-card {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.currency-code {
+  font-size: 0.7rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.currency-name {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+.currency-rate {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.converter-box {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.converter-box h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.converter-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.converter-row input,
+.converter-row select {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.converter-row input:focus,
+.converter-row select:focus {
+  border-color: #5a5a8a;
+}
+
+.converter-row input { width: 120px; }
+.converter-row select { width: 90px; }
+
+.converter-row .eq {
+  color: #555;
+  font-size: 1rem;
+}
+
+.converter-row .result {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #64b5f6;
+  min-width: 100px;
+}
+
+.markets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.market-card {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.market-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.market-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.market-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.market-time {
+  font-size: 0.65rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.loading {
+  color: #666;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 2rem;
+  grid-column: 1 / -1;
+}
+
+.error-state {
+  color: #a55;
+  text-align: center;
+  padding: 2rem;
+  grid-column: 1 / -1;
+}
+
+.refresh-bar {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #555;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4caf50;
+}
+
+@media (max-width: 640px) {
+  header h1 { font-size: 1.3rem; }
+  .grid { grid-template-columns: 1fr; }
+  .time { font-size: 1.5rem; }
+  .weather-temp { font-size: 1.6rem; }
+  .market-price { font-size: 1.4rem; }
+  .currency-grid { grid-template-columns: 1fr 1fr; }
+}
