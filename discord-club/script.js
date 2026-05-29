@@ -1,5 +1,5 @@
-var API_BASE = 'https://discord-club.omr.workers.dev';
-var WS_URL = 'wss://discord-club.omr.workers.dev/ws';
+var API_BASE = 'https://discord-club.itsjust.workers.dev';
+var WS_URL = 'wss://discord-club.itsjust.workers.dev/ws';
 
 var state = {
   token: localStorage.getItem('token'),

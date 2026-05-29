@@ -3,15 +3,5 @@ main = "worker.js"
 compatibility_date = "2024-12-01"
 
 kv_namespaces = [
-  { binding = "DISCORD_CLUB_KV", id = "", preview_id = "" }
+  { binding = "DISCORD_CLUB_KV", id = "546c5154f7e8433fba14982050f18562" }
 ]
-
-r2_buckets = [
-  { binding = "DISCORD_CLUB_R2", bucket_name = "discord-club", preview_bucket_name = "discord-club-preview" }
-]
-
-[env.production]
-vars = { ENVIRONMENT = "production" }
-
-[env.preview]
-vars = { ENVIRONMENT = "preview" }
